@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express') //импортируем express
 const sequelize = require('./db') // импортируем файл db
+const models = require('./models/models') // импортируем модели
 const PORT = process.env.PORT || 5000
 
 const app = express()//создаем объект, вызвав функцию express, с него начинается запуск приложения
