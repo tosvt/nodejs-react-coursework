@@ -18,7 +18,7 @@ const Applications = sequelize.define('applications', {
 const Boxes = sequelize.define('boxes', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     box_size: {type: DataTypes.STRING, allowNull: false},
-    availability: {type: DataTypes.STRING, defaultValue: "-"},
+    availability: {type: DataTypes.STRING, defaultValue: "NO"},
     price: {type: DataTypes.STRING, allowNull: false},
     location: {type: DataTypes.STRING, allowNull: false},
 })
