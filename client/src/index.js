@@ -10,7 +10,7 @@ export const Context = createContext(null) // экспортируем createCon
 ReactDOM.render(
   <Context.Provider value={{
     user: new UserBooks(),
-    books: new BooksStore()
+    book: new BooksStore()
   }}>
     <App/>
   </Context.Provider>,
