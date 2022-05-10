@@ -6,6 +6,7 @@ import UserBooks from "./books/UserBooks";
 
 export const Context = createContext(null) // экспортируем createContext
 
+
 // в props value передаем данные, создадим новый объект класса UserBooks
 ReactDOM.render(
   <Context.Provider value={{
