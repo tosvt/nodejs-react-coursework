@@ -27,6 +27,7 @@ const Books = sequelize.define('books', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     title: {type: DataTypes.STRING, allowNull: false},
     quantity: {type: DataTypes.INTEGER, defaultValue: 0},
+    //desc: {type: DataTypes.TEXT, allowNull: false},
     price: {type: DataTypes.STRING, allowNull: false},
     img: {type: DataTypes.STRING, allowNull: false},
 })

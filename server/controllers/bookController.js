@@ -6,16 +6,47 @@ const path = require('path')
 class BookController {
     async create(req, res, next){
         try{
-            const {title, price} = req.body
+            const {title, quantity, price} = req.body
             const {img} = req.files
             let fileName = uuid.v4() + ".jpg"
             img.mv(path.resolve(__dirname, '..', 'static', fileName)) // перемещение изображения в папку static
             // const {title} = req.body
             // const book = await Books.create({title})
             // return res.json(book)
-            const book = await Books.create({title, price, img: fileName}) // отправляем данные
+            const book = await Books.create({title, quantity, price, img: fileName}) // отправляем данные
 
             return res.json(book) // возвращаем информацию обратно на клиент
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+
+    async updateBook(req, res, next){
+        try{
+            const {id} = req.params //получаем id книги
+            const {title, quantity, price} = req.body
+            const {img} = req.files
+            let fileName = uuid.v4() + ".jpg"
+            img.mv(path.resolve(__dirname, '..', 'static', fileName))
+            const book = await Books.update({title, quantity, price, img: fileName}, {
+                    where: {id}
+                },
+            ) // отправляем данные
+            return res.json(book) // возвращаем информацию обратно на клиент
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+
+    async deleteBook(req, res, next){
+        try{
+            const {id} = req.params //получаем id книги
+            const book = await Books.destroy(
+                {
+                    where: {id}
+                },
+            )
+            return res.send("book removed")
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }
@@ -34,7 +65,7 @@ class BookController {
         const {id} = req.params //получаем id книги
         const book = await Books.findOne(
             {
-                where: {id},
+                where: {id}
                 //include: [{model: Books, as: 'quantity'}]
             },
         )
