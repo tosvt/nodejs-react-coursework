@@ -2,11 +2,15 @@ import { observer } from "mobx-react-lite";
 import React, { useContext, useState } from "react";
 import { Form, Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+import { useHistory, useParams } from "react-router-dom";
 import { Context } from "../..";
-import { createBook } from "../../http/bookAPI";
+import { updateBook } from "../../http/bookAPI";
+import { BOOKPAGE_ROUTE } from "../../utils/consts";
 
-const CreateBook = observer(({ show, onHide }) => {
+const ChangeBook = observer(({ show, onHide }) => {
     const {book} = useContext(Context)
+    const {id} = useParams();
+    const history = useHistory() // динамическое передвижение по страницам
     // создаем состояние для каждого инпута
     const [title, setTitle] = useState('')
     const [quantity, setQuantity] = useState()
@@ -19,13 +23,13 @@ const CreateBook = observer(({ show, onHide }) => {
     } 
     
     //добавление новой книги в БД
-    const addBook = () => {
+    const changeBook = () => {
         const formData = new FormData()
         formData.append('title', title)
         formData.append('quantity', quantity)
         formData.append('price', price)
         formData.append('img', img)
-        createBook(formData).then(data => onHide()) // если запрос прошел успешно - закрываем модальное окна
+        updateBook(id, formData).then(data => onHide()) // если запрос прошел успешно - закрываем модальное окна
     }
     return (
         <Modal
@@ -36,11 +40,12 @@ const CreateBook = observer(({ show, onHide }) => {
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Добавить книгу
+                    Редактировать книгу
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
+                   ID  {id}
                     <Form.Control
                         value={title}
                         onChange={e => setTitle(e.target.value)}
@@ -71,10 +76,10 @@ const CreateBook = observer(({ show, onHide }) => {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="outline-danger" onClick={onHide}>Закрыть</Button>
-                <Button variant="outline-success" onClick={addBook}>Добавить</Button>
+                <Button variant="outline-success" onClick={changeBook}>Изменить</Button>
             </Modal.Footer>
         </Modal>
     );
 });
 
-export default CreateBook;
+export default ChangeBook;

@@ -21,7 +21,7 @@ export default class UserBooks { // экспорт одноименного кл
         return this._isAuth
     }
 
-    get user() {
+    get User() {
         return this._user
     }
 }

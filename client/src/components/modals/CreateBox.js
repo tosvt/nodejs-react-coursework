@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Form, Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+import { Context } from "../..";
 
 const CreateBox = ({ show, onHide }) => {
+    const {box} = useContext(Context)
+    // создаем состояние для каждого инпута
+    const [box_size, setSize] = useState('')
+    //const [availability, setQuantity] = useState(0)
+    const [price, setPrice] = useState('0')
+    const [location, setLocation] = useState(null)
+
     return (
         <Modal
             show={show}

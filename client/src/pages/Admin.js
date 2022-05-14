@@ -22,7 +22,14 @@ const Admin = () => {
                 className="mt-4 p-2"
                 onClick={() => setBoxVisible(true)}
                 >
-                Добавить бокс
+                Изменить книгу
+            </Button>
+            <Button 
+                variant={"outline-secondary"} 
+                className="mt-4 p-2"
+                onClick={() => setBoxVisible(true)}
+                >
+                Удалить книгу
             </Button>
             <CreateBook show={bookVisible} onHide={() => setBookVisible(false)}/>
             <CreateBox show={boxVisible} onHide={() => setBoxVisible(false)}/>

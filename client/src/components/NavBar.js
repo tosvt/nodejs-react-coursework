@@ -21,7 +21,7 @@ const NavBar = observer(() => {
 
     // если пользователь авторизован - первый блок, иначе второй
     return (
-        <Navbar collapseOnSelect expand="lg" bg="info" variant="light">
+        <Navbar collapseOnSelect expand="lg" bg="danger" variant="light">
             <Container>
                 <NavLink style={{ color: 'white', fontSize: '20px'}} to={BOOKS_ROUTE}>SafeBooks</NavLink>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -32,7 +32,7 @@ const NavBar = observer(() => {
                         <NavLink style={{ color: 'white', display: 'block', marginLeft: '20px'}} to={CONTACTS_ROUTE}>Контакты</NavLink>
                     </Nav>
                     <Nav>
-                        {user.isAuth ? <Nav className="ml-auto" style={{ color: 'white' }}>
+                        {user.isAuth && user.User.role === "ADMIN" ? <Nav className="ml-auto" style={{ color: 'white' }}>
                             <Button variant={"outline-light"} onClick={() => history.push(ADMIN_ROUTE)}>Админ панель</Button>
                             <Button variant={"outline-light"} onClick={() => logOut()} className="ml-2">Выйти</Button>
                         </Nav>
