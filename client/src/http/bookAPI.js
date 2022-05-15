@@ -45,6 +45,18 @@ export const fetchOneBoook = async (id) => {
     return data
 }
 
+export const createApplication = async (application) => {
+    // помещаем ответ, который будет возвращаться от сервера
+    const {data} = await $host.post('api/applications', application)
+    return data
+}
+
+export const fetchApplications = async () => {
+    // помещаем ответ, который будет возвращаться от сервера
+    const {data} = await $host.get('api/applications')
+    return data
+}
+
 // export const createApplication = async (book) => {
 //     // помещаем ответ, который будет возвращаться от сервера
 //     const {data} = await $authHost.post('api/application', box)

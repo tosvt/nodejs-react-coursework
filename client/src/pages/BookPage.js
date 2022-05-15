@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Col, Container, Row, Table } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import { useHistory, useParams } from 'react-router-dom';
@@ -6,15 +6,15 @@ import { deleteBook, fetchOneBoook } from '../http/bookAPI';
 import { BOOKS_ROUTE } from '../utils/consts';
 import ChangeBook from '../components/modals/ChangeBook';
 import { observer } from 'mobx-react-lite';
+import { Context } from '..';
 
 const BookPage = observer(() => {
     const [book, setBooks] = useState(true) // с помощью хука создаем локальное состояние
     const history = useHistory() // динамическое передвижение по страницам
-    console.log(history)
+    const {user} = useContext(Context);
     
     //получаем параметры строки запроса
     const { id } = useParams()
-    console.log("ID: " + id)
     const [bookChangeVisible, setBookChangeVisible] = useState(false)
     //подргруажем единожды книгу
     useEffect(() => {
@@ -39,20 +39,20 @@ const BookPage = observer(() => {
                             className="d-flex flex-column"
                         >
                             <h2>{book.title}</h2>
-                            <Button
+                            {user.isAuth && <Button
                                 variant={"outline-success"}
                                 className="mb-3"
                                 onClick={() => setBookChangeVisible(true)}
                             >
                                 Редактировать книгу
-                            </Button>
+                            </Button> }
                             
-                            <Button
+                            {user.isAuth && <Button
                                 variant={"outline-danger"}
                                 onClick={() => onDeleteBook(id)}
                             >
                                 Удалить книгу
-                            </Button>
+                            </Button> }
                             <br/>
                             <Table striped bordered hover>
                                 <thead>

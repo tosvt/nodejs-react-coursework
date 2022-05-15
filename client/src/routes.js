@@ -5,12 +5,17 @@ import BookPage from "./pages/BookPage"
 import Books from "./pages/Books"
 import Boxes from "./pages/Boxes"
 import Contacts from "./pages/Contacts"
-import { ABOUT_ROUTE, ADMIN_ROUTE, BOOKPAGE_ROUTE, BOOKS_ROUTE, BOXES_ROUTE, CONTACTS_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE  } from "./utils/consts"
+import { ABOUT_ROUTE, ADMIN_ROUTE, APPLICATIONS_ROUTE, BOOKPAGE_ROUTE, BOOKS_ROUTE, BOXES_ROUTE, CONTACTS_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE  } from "./utils/consts"
+import Applications from "./pages/Applications"
 
 export const authRoutes = [
     {
         path: ADMIN_ROUTE,
         Component: Admin
+    },
+    {
+        path: APPLICATIONS_ROUTE,
+        Component: Applications
     }
 ]
 

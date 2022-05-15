@@ -7,7 +7,7 @@ import { fetchBoooks } from '../http/bookAPI';
 //import { fetchBooks } from '../http/boxAPI';
 
 const Books = observer(() => {
-    const {book} = useContext(Context)
+    const {user, book} = useContext(Context)
     //единожды при откртии страницы с книгами подгружаем массив
     useEffect(() => {
         fetchBoooks().then(data => book.setBooks(data.rows))
